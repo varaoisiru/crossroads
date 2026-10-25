@@ -3,3 +3,4 @@
 *.db-journal
 *.db-walrus
 *.db-shm
+server.log
