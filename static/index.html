@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crossroads — Food at an Intersection</title>
+<meta name="description" content="Type a crossroads, see every food place near it, with menu and deals links. Locally hosted, no API keys.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<div class="bg" aria-hidden="true">
+  <div class="bg-gradient"></div>
+  <div class="bg-orb orb-a" data-parallax="30"></div>
+  <div class="bg-orb orb-b" data-parallax="-50"></div>
+  <div class="bg-orb orb-c" data-parallax="20"></div>
+  <div class="bg-noise"></div>
+  <div class="bg-grid"></div>
+</div>
+
+<header class="hero" id="hero">
+  <div class="hero-inner" data-parallax="12">
+    <div class="logo">⌖ CROSSROADS</div>
+    <h1>Every bite<br><span class="grad">at the corner.</span></h1>
+    <p class="tagline">Type an intersection. See <strong>all</strong> the food places around it — with menus, deals links, hours and distance. No API keys. Your data stays local.</p>
+  </div>
+  <div class="hero-card glass" data-parallax="-18">
+    <div class="hero-card-row"><span class="dot live"></span> Live data · OpenStreetMap</div>
+    <div class="hero-card-row big"><span id="heroCount">—</span> places found last search</div>
+    <div class="hero-card-row dim">Menus &amp; deals are links to the real places — never invented prices.</div>
+  </div>
+  <div class="scroll-hint" aria-hidden="true">⌄</div>
+</header>
+
+<div class="search-shell" id="searchShell">
+  <form id="searchForm" class="search-bar glass">
+    <span class="search-icon">⌖</span>
+    <input id="q" type="text" autocomplete="off" spellcheck="false"
+      placeholder="7th St &amp; Bell Rd, Phoenix, AZ" aria-label="Crossroads, e.g. street and street, city, state">
+    <button type="submit" id="goBtn">Find food →</button>
+  </form>
+  <div class="controls">
+    <div class="pills" role="group" aria-label="Radius">
+      <button class="pill" data-radius="500">500 m</button>
+      <button class="pill active" data-radius="1200">1.2 km</button>
+      <button class="pill" data-radius="2500">2.5 km</button>
+    </div>
+    <div class="pills" role="group" aria-label="Sort">
+      <button class="pill sortpill active" data-sort="distance">Nearest</button>
+      <button class="pill sortpill" data-sort="name">A–Z</button>
+    </div>
+    <button class="pill ghost" id="historyBtn" type="button">◷ History</button>
+    <button class="pill ghost" id="favsBtn" type="button">♥ Favorites <span id="favCount"></span></button>
+  </div>
+  <div id="chips" class="chips"></div>
+</div>
+
+<main>
+  <section id="status" class="status"></section>
+
+  <section id="skeleton" class="grid hidden" aria-hidden="true">
+    <div class="skel"></div><div class="skel"></div><div class="skel"></div>
+    <div class="skel"></div><div class="skel"></div><div class="skel"></div>
+  </section>
+
+  <section id="results" class="grid"></section>
+
+  <section class="value-tips glass reveal">
+    <h2>Value tips</h2>
+    <ul>
+      <li>Check a place's own menu link before a delivery app — delivery markups can add dollars to the same item.</li>
+      <li>“Deals” links search the place's real coupons and offers; if nothing turns up, that place may simply not run deals.</li>
+      <li>Lunch specials and value menus usually live on the restaurant's own site, not on map listings.</li>
+      <li>Distances here are straight-line from your crossroads — a 2-minute walk across the same strip mall beats a drive across a busy arterial.</li>
+    </ul>
+  </section>
+</main>
+
+<aside id="drawer" class="drawer glass" aria-hidden="true">
+  <div class="drawer-head"><h3 id="drawerTitle">History</h3><button id="drawerClose" type="button">✕</button></div>
+  <div id="drawerBody" class="drawer-body"></div>
+</aside>
+<div id="scrim" class="scrim hidden"></div>
+
+<footer>
+  <p>Crossroads · Rust + SQLite + advanced CSS · Data: © OpenStreetMap contributors (Nominatim + Overpass)<br>
+  Access it via <strong>http://localhost:8891</strong>, the LAN IP of the machine running it, or that machine's <strong>Tailscale IP</strong> — e.g. http://100.85.201.50:8891 on the i7. Bound to 0.0.0.0:8891 by default.</p>
+</footer>
+
+<script src="/app.js"></script>
+</body>
+</html>
